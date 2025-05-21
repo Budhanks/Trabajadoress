@@ -2,7 +2,7 @@
   "name": "trabajadoress",
   "version": "1.0.0",
   "description": "Proyecto de vinculacion empresarial",
-  "main": "app .js",
+  "main": "app.js",
   "scripts": {
 
     "start": "node app.js",
