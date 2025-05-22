@@ -12,7 +12,8 @@
       --darker-color: #1e272e;
       --light-color: #f5f6fa;
       --gray-color: #636e72;
-      --danger-color: #d63031;
+      --danger-color: #ff4757;
+      --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     }
     
     * {
@@ -23,112 +24,195 @@
     }
     
     body {
-      background-color: var(--darker-color);
+      background: var(--darker-color);
       color: var(--light-color);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(162, 155, 254, 0.15) 0%, transparent 50%);
     }
     
     .login-container {
-      background-color: var(--dark-color);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      background: var(--dark-color);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       width: 100%;
       max-width: 400px;
       animation: aparecer 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: var(--gradient);
+      opacity: 0.05;
+      transform: rotate(45deg);
+      z-index: 0;
     }
     
     h2 {
-      color: var(--primary-color);
+      color: var(--light-color);
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       font-size: 1.8rem;
+      position: relative;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--gradient);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
     }
     
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+      position: relative;
     }
     
     label {
       display: block;
-      margin-bottom: 0.5rem;
-      color: var(--secondary-color);
+      margin-bottom: 0.75rem;
+      color: var(--light-color);
       font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
     }
     
     input[type="text"],
     input[type="password"] {
       width: 100%;
-      padding: 0.75rem;
-      background-color: var(--darker-color);
-      border: 1px solid var(--gray-color);
-      border-radius: 6px;
+      padding: 0.85rem 1.25rem 0.85rem 2.5rem;
+      background: var(--darker-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
       color: var(--light-color);
-      font-size: 1rem;
-      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23636e72" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: 1rem center;
+    }
+    
+    input[type="password"] {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23636e72" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>');
     }
     
     input::placeholder {
       color: var(--gray-color);
+      opacity: 0.8;
     }
     
     input:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.3);
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+      background-image: none;
+      padding-left: 1.25rem;
     }
     
     button {
       width: 100%;
-      padding: 0.8rem;
-      background-color: var(--primary-color);
+      padding: 1rem;
+      background: var(--gradient);
       color: var(--light-color);
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
     button:hover {
-      background-color: var(--secondary-color);
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 16px rgba(108, 92, 231, 0.4);
+    }
+    
+    button:hover::before {
+      opacity: 1;
     }
     
     .error-message {
       color: var(--danger-color);
       text-align: center;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-weight: 500;
-      padding: 0.5rem;
-      border-radius: 4px;
-      background-color: rgba(214, 48, 49, 0.1);
+      padding: 0.75rem;
+      border-radius: 6px;
+      background: rgba(255, 71, 87, 0.1);
+      border: 1px solid rgba(255, 71, 87, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .error-message::before {
+      content: '!';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: var(--danger-color);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
     }
     
     @keyframes aparecer {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(20px) scale(0.95);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
     
     @media (max-width: 480px) {
       .login-container {
-        padding: 1.5rem;
+        padding: 1.75rem;
       }
       
       h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
     }
   </style>

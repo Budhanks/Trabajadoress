@@ -1,46 +1,157 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gráficas</title>
+  <meta charset="UTF-8">
+  <title>Gráficas de Trabajadores</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    :root {
+      --primary-color: #6c5ce7;
+      --secondary-color: #a29bfe;
+      --dark-color: #2d3436;
+      --darker-color: #1e272e;
+      --light-color: #f5f6fa;
+      --gray-color: #636e72;
+      --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
+      background: var(--darker-color);
+      color: var(--light-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(162, 155, 254, 0.15) 0%, transparent 50%);
     }
-    .grafica-container {
-      margin-bottom: 3rem;
+
+    h1 {
+      color: var(--light-color);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 2.2rem;
+      text-align: center;
+      position: relative;
+      margin-bottom: 30px;
+      animation: aparecer 0.5s ease;
     }
-    canvas {
-      max-width: 600px;
-      margin: auto;
+    h1::after {
+      content: '';
       display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .graficas-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1400px;
+      margin-bottom: 30px;
+    }
+
+    .grafica-container {
+      flex: 1 1 calc(50% - 20px);
+      background: var(--dark-color);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      animation: aparecer 0.5s ease;
+    }
+    .grafica-container::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: var(--gradient);
+      opacity: 0.05;
+      transform: rotate(45deg);
+      z-index: 0;
+    }
+    .grafica-container h2 {
+      position: relative;
+      z-index: 1;
+      color: var(--secondary-color);
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .grafica-container canvas {
+      position: relative;
+      z-index: 1;
+      width: 100% !important;
+      height: 400px !important;
+    }
+
+    button.logout-btn {
+      background: var(--gradient);
+      color: var(--light-color);
+      border: none;
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(108,92,231,0.4);
+      margin-bottom: 20px;
+    }
+    button.logout-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .grafica-container { flex: 1 1 100%; }
     }
   </style>
 </head>
 <body>
   <h1>Gráficas de Trabajadores</h1>
 
-  <div class="grafica-container">
-    <h2>Por Género</h2>
-    <canvas id="graficaGenero"></canvas>
-  </div>
+  <div class="graficas-grid">
+    <div class="grafica-container">
+      <h2>Por Género</h2>
+      <canvas id="graficaGenero"></canvas>
+    </div>
 
-  <div class="grafica-container">
-    <h2>Por Categoría</h2>
-    <canvas id="graficaCategoria"></canvas>
-  </div>
+    <div class="grafica-container">
+      <h2>Por Categoría</h2>
+      <canvas id="graficaCategoria"></canvas>
+    </div>
 
-  <div class="grafica-container">
-    <h2>Por Grado Académico</h2>
-    <canvas id="graficaGrado"></canvas>
-  </div>
+    <div class="grafica-container">
+      <h2>Por Grado Académico</h2>
+      <canvas id="graficaGrado"></canvas>
+    </div>
 
-  <div class="grafica-container">
-    <h2>Por Antigüedad UNAM</h2>
-    <canvas id="graficaAntiguedad"></canvas>
+    <div class="grafica-container">
+      <h2>Por Antigüedad UNAM</h2>
+      <canvas id="graficaAntiguedad"></canvas>
+    </div>
   </div>
 
   <script src="/js/graficas.js"></script>

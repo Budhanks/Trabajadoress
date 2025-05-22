@@ -1,6 +1,6 @@
 
 const path = require('path');
-const pool = require('../db');
+const pool = require('../db/conexion');
 
 const authController = {
 
@@ -55,7 +55,7 @@ const authController = {
             if (err) {
                 console.error('Error al cerrar sesión:', err);
             }
-            res.redirect('/auth/login');
+            res.redirect('/');
         });
     }
 };

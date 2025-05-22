@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let trabajadorEditando = null;
 
+function filtrarAdmin() {
+  const cat = document.getElementById('filtroCategoria').value;
+  const grd = document.getElementById('filtroGrado').value;
+  const params = new URLSearchParams();
+  if (cat) params.append('categoria', cat);
+  if (grd) params.append('grado', grd);
+
+  cargarTrabajadores('/filtrar?' + params.toString());
+}
+
 async function cargarTrabajadores() {
   try {
     const res = await fetch('/trabajadores');

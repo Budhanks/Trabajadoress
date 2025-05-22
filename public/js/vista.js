@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function cargarTrabajadores(query = '') {
   try {
-    const res = await fetch(`/trabajadores/publico${query}`);
+    const res = await fetch(`/trabajadores/filtrar${query}`);
     const data = await res.json();
 
     const tbody = document.querySelector('#tabla tbody');
@@ -14,7 +14,7 @@ async function cargarTrabajadores(query = '') {
     data.forEach((trabajador, i) => {
       const fila = `
         <tr>
-          <td>${trabajador.numero_trabajador}</td>
+          <td>${i + 1}</td>
           <td>${trabajador.nombre_completo}</td>
           <td>${trabajador.genero}</td>
           <td>${trabajador.categoria}</td>
@@ -59,7 +59,7 @@ async function cargarFiltros() {
   }
 }
 
-function filtrar() {
+async function filtrar() {
   const categoria = document.getElementById('categoria').value;
   const grado = document.getElementById('grado').value;
 
@@ -67,5 +67,5 @@ function filtrar() {
   if (categoria) query.append('categoria', categoria);
   if (grado) query.append('grado', grado);
 
-  cargarTrabajadores('?' + query.toString());
+  await cargarTrabajadores('?' + query.toString());
 }

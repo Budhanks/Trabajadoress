@@ -12,166 +12,205 @@
       --darker-color: #1e272e;
       --light-color: #f5f6fa;
       --gray-color: #636e72;
-      --success-color: #00b894;
-      --warning-color: #fdcb6e;
-      --danger-color: #d63031;
+      --danger-color: #ff4757;
+      --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
+
     body {
-      background-color: var(--darker-color);
+      background: var(--darker-color);
       color: var(--light-color);
-      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
       padding: 20px;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(162, 155, 254, 0.15) 0%, transparent 50%);
     }
-    
+
     h1 {
-      color: var(--primary-color);
+      color: var(--light-color);
       text-align: center;
-      margin: 20px 0 30px;
       font-size: 2.2rem;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      position: relative;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: aparecer 0.5s ease;
     }
-    
-    div {
-      background-color: var(--dark-color);
-      padding: 20px;
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      margin: 0.5rem auto 1.5rem;
+      border-radius: 2px;
+    }
+    button {
+      background: var(--gradient);
+      color: var(--light-color);
+      border: none;
+      padding: 0.85rem 1.25rem;
       border-radius: 8px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin: 0.5rem;
+    }
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(108,92,231,0.4);
+    }
+    button:hover::before {
+      opacity: 1;
+    }
+
+    .controls {
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
-      align-items: center;
+      background: var(--dark-color);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      animation: aparecer 0.5s ease;
+      margin-bottom: 30px;
     }
-    
-    label {
-      color: var(--secondary-color);
+    .controls::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: var(--gradient);
+      opacity: 0.05;
+      transform: rotate(45deg);
+      z-index: 0;
+    }
+    .controls label,
+    .controls select,
+    .controls button {
+      position: relative;
+      z-index: 1;
+    }
+    .controls label {
+      color: var(--light-color);
       font-weight: 500;
+      letter-spacing: 0.5px;
       margin-right: 5px;
     }
-    
-    select {
-      background-color: var(--darker-color);
+    .controls select {
+      background: var(--darker-color);
       color: var(--light-color);
-      border: 1px solid var(--gray-color);
-      border-radius: 4px;
-      padding: 8px 12px;
-      margin-right: 15px;
-      min-width: 150px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.85rem 1.25rem;
       transition: all 0.3s ease;
     }
-    
-    select:hover {
-      border-color: var(--secondary-color);
+    .controls select:hover {
+      border-color: var(--primary-color);
     }
-    
-    select:focus {
+    .controls select:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.3);
+      box-shadow: 0 0 0 3px rgba(108,92,231,0.2);
     }
-    
-    button {
-      background-color: var(--primary-color);
-      color: white;
+    .controls button {
+      background: var(--gradient);
+      color: var(--light-color);
       border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
       cursor: pointer;
-      font-weight: 500;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    
-    button:hover {
-      background-color: var(--secondary-color);
+    .controls button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 16px rgba(108,92,231,0.4);
     }
-    
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
+
     table {
       width: 100%;
+      max-width: 1800px;
       border-collapse: collapse;
-      margin-top: 20px;
-      background-color: var(--dark-color);
-      border-radius: 8px;
+      background: var(--dark-color);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: aparecer 0.5s ease;
     }
-    
     th, td {
       padding: 12px 15px;
       text-align: left;
-      border-bottom: 1px solid var(--gray-color);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--light-color);
+      font-size: 0.9rem;
     }
-    
     th {
-      background-color: var(--primary-color);
-      color: white;
-      font-weight: 600;
+      background: var(--gradient);
       text-transform: uppercase;
-      font-size: 0.85rem;
       letter-spacing: 0.5px;
     }
-    
     tr:hover {
-      background-color: rgba(108, 92, 231, 0.1);
+      background: rgba(108,92,231,0.1);
     }
-    
     tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.03);
+      background: rgba(255,255,255,0.03);
     }
-    
-    tbody tr:last-child td {
-      border-bottom: none;
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-    
-    @media (max-width: 768px) {
-      div {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      
-      select {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 10px;
-      }
-      
-      button {
-        width: 100%;
-      }
-      
-      table {
-        display: block;
-        overflow-x: auto;
-      }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+      .controls { padding: 1.75rem; flex-direction: column; }
+      table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
 <body>
   <h1>Listado Público de Trabajadores</h1>
 
+  <button class="logout-btn" onclick="window.location.href='/'">
+    Cerrar sesión
+  </button>
+
+  <!-- Filtros -->
   <div>
     <label for="categoria">Categoría:</label>
-    <select id="categoria"></select>
+    <select id="categoria" onchange="filtrar()"></select>
 
     <label for="grado">Grado Académico:</label>
-    <select id="grado"></select>
-
-    <button onclick="filtrar()">Filtrar</button>
+    <select id="grado" onchange="filtrar()"></select>
   </div>
 
   <table id="tabla">
@@ -192,4 +231,5 @@
 
   <script src="/js/vista.js"></script>
 </body>
+
 </html>
