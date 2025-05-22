@@ -1,4 +1,4 @@
-const pool = require('../db/conexion');
+const pool = require('../db');
 const XLSX = require('xlsx');
 const fs = require('fs');
 
