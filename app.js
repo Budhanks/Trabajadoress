@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-const appRouter = require('./routes/auth.js');
 const app = express();
 
 // Middleware
@@ -20,16 +19,11 @@ app.use(session({
 
 // Middleware para proteger rutas
 function requireLogin(req, res, next) {
-  if (!req.session.usuario) {
-    return res.redirect('/auth/login');
-  }
+  if (!req.session.usuario) return res.redirect('/');
   next();
 }
-
 function requireAdmin(req, res, next) {
-  if (!req.session.usuario?.es_admin) {
-    return res.redirect('/vista');
-  }
+  if (!req.session.usuario?.es_admin) return res.redirect('/vista');
   next();
 }
 
@@ -54,11 +48,6 @@ app.get('/vista', requireLogin, (req, res) => {
 
 app.get('/graficas', requireLogin, requireAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'graficas.html'));
-});
-
-// Redirección por defecto
-app.get('/', (req, res) => {
-  res.redirect('/auth/login');
 });
 
 // Puerto
