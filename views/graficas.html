@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gráficas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    .grafica-container {
+      margin-bottom: 3rem;
+    }
+    canvas {
+      max-width: 600px;
+      margin: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gráficas de Trabajadores</h1>
+
+  <div class="grafica-container">
+    <h2>Por Género</h2>
+    <canvas id="graficaGenero"></canvas>
+  </div>
+
+  <div class="grafica-container">
+    <h2>Por Categoría</h2>
+    <canvas id="graficaCategoria"></canvas>
+  </div>
+
+  <div class="grafica-container">
+    <h2>Por Grado Académico</h2>
+    <canvas id="graficaGrado"></canvas>
+  </div>
+
+  <div class="grafica-container">
+    <h2>Por Antigüedad UNAM</h2>
+    <canvas id="graficaAntiguedad"></canvas>
+  </div>
+
+  <script src="/js/graficas.js"></script>
+</body>
+</html>
