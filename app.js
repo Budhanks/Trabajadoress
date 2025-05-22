@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const appRouter = require('./routes/app.js');
 const app = express();
 
 // Middleware
@@ -38,7 +38,8 @@ const authRoutes = require('./routes/auth');
 const trabajadoresRoutes = require('./routes/trabajadores');
 const graficasRoutes = require('./routes/graficas');
 
-app.use('/auth', authRoutes);
+app.use('/', appRouter);
+//app.use('/auth', authRoutes);
 app.use('/trabajadores', requireLogin, trabajadoresRoutes);
 app.use('/graficas', requireLogin, graficasRoutes);
 
