@@ -1,6 +1,6 @@
 
 const path = require('path');
-const pool = require('../db/conexion');
+const pool = require('../db');
 
 const authController = {
 
