@@ -15,7 +15,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Middleware para proteger rutas
+// Middleware
 function requireLogin(req, res, next) {
   if (!req.session.usuario) return res.redirect('/');
   next();
@@ -30,7 +30,7 @@ const authRoutes = require('./routes/auth');
 const trabajadoresRoutes = require('./routes/trabajadores');
 const graficasRoutes = require('./routes/graficas');
 
-// Usar rutas
+// Usos rutas
 app.use('/', authRoutes);
 app.use('/trabajadores', requireLogin, trabajadoresRoutes);
 app.use('/graficas', requireLogin, graficasRoutes);

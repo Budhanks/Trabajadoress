@@ -1,4 +1,4 @@
-// Función genérica para construir una gráfica
+
 function crearGrafica(idCanvas, etiquetas, datos, titulo, tipo = 'bar') {
   const ctx = document.getElementById(idCanvas).getContext('2d');
   new Chart(ctx, {
@@ -30,7 +30,7 @@ function crearGrafica(idCanvas, etiquetas, datos, titulo, tipo = 'bar') {
   });
 }
 
-// Cargar datos desde el backend y crear gráficas
+// Cargar datos backeedn ygraficas
 async function cargarDatosYGraficas() {
   try {
     // Género
@@ -63,7 +63,7 @@ async function cargarDatosYGraficas() {
       'Trabajadores por Grado Académico'
     );
 
-    // Antigüedad
+    // Antiguedad
     const resAntiguedad = await fetch('/graficas/antiguedad');
     const datosAntiguedad = await resAntiguedad.json();
     crearGrafica(

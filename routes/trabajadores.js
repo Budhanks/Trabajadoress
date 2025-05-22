@@ -3,7 +3,7 @@ const router  = express.Router();
 const upload  = require('../utils/multer');
 const trabajadoresController = require('../controllers/trabajadoresController');
 
-// Ahora estas propiedades deben existir en trabajadoresController:
+
 router.get('/',             trabajadoresController.obtenerTodos);
 router.get('/publico',      trabajadoresController.obtenerPublicos);
 router.post('/',            trabajadoresController.crear);

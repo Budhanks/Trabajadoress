@@ -3,15 +3,15 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 const path = require('path');
 
-// Asegurar que existe la carpeta uploads
+
 const uploadsDir = path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
-// Controlador de trabajadores
+// obtener trabajadorezzzzz
 const trabajadoresController = {
-  // Obtener todos los trabajadores (admin)
+  
   obtenerTodos: async (req, res) => {
     try {
       const result = await pool.query(`
@@ -28,7 +28,7 @@ const trabajadoresController = {
     }
   },
 
-  // Obtener trabajadores para vista pública (sin datos sensibles)
+  
   obtenerPublicos: async (req, res) => {
     try {
       const result = await pool.query(`
@@ -79,7 +79,7 @@ const trabajadoresController = {
       res.status(201).json(result.rows[0]);
     } catch (error) {
       console.error('Error en crear:', error);
-      if (error.code === '23505') { // Código de PostgreSQL para violación de unicidad
+      if (error.code === '23505') { 
         res.status(409).json({ error: 'El número de trabajador ya existe' });
       } else {
         res.status(500).json({ error: 'Error al crear trabajador' });
@@ -158,7 +158,7 @@ const trabajadoresController = {
     }
   },
 
-  // Importar trabajadores desde archivo Excel
+  // Importar trabajadores
   importarExcel: async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: 'No se ha enviado ningún archivo' });
@@ -175,7 +175,7 @@ const trabajadoresController = {
       const data = XLSX.utils.sheet_to_json(sheet);
 
       if (data.length === 0) {
-        fs.unlinkSync(req.file.path); // Limpiar archivo
+        fs.unlinkSync(req.file.path); 
         return res.status(400).json({ error: 'El archivo Excel está vacío' });
       }
 
@@ -302,18 +302,18 @@ const trabajadoresController = {
         ORDER BY id_trabajador
       `);
 
-      // 2. Convertir a hoja de Excel
+      // Convertir a hoja de Excel
       const worksheet = XLSX.utils.json_to_sheet(result.rows);
       const workbook  = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Trabajadores');
 
-      // 3. Generar buffer
+      // Generar buffer
       const buffer = XLSX.write(workbook, {
         bookType: 'xlsx',
         type: 'buffer'
       });
 
-      // 4. Enviar respuesta con cabeceras para descarga
+      
       res.setHeader('Content-Disposition', 'attachment; filename="trabajadores.xlsx"');
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       res.send(buffer);
@@ -350,7 +350,7 @@ const trabajadoresController = {
       valores.push(grado);
     }
 
-    // Agregar filtro de búsqueda por texto (solo en categoría y grado académico)
+
     if (busqueda && busqueda.trim() !== '') {
       condiciones.push(`(
         LOWER(c.nombre) LIKE LOWER(${valores.length + 1}) OR

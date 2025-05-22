@@ -8,7 +8,7 @@ const authController = {
         res.sendFile(path.join(__dirname, '../views/login.html'));
     },
 
-    // Procesar login
+    // login
     login: async (req, res) => {
         const { username, password } = req.body;
 
@@ -24,7 +24,7 @@ const authController = {
 
             const user = result.rows[0];
 
-            // Comparación directa (sin bcrypt)
+
             if (password !== user.password) {
                 return res.redirect('/auth/login?error=1');
             }
